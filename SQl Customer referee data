@@ -1,0 +1,45 @@
+CREATE TABLE Customer (
+    id INT,
+    name VARCHAR(255),
+    referee_id INT
+);
+
+id is the primary key column for this table.
+Each row of this table indicates the id of a customer, their name, and the id of the customer who
+referred them.
+Write an SQL query to report the names of the customer that are not referred by the customer with id
+= 2.
+Return the result table in any order.
+The query result format is in the following example.
+
+
+id	name	referee_id
+1	Will	null
+2	Jane	null
+3	Alex	2
+4	Bill	null
+5	Zack	1
+6	Mark	2
+
+
+Query :
+Select name from Customer
+where referee_id !=2 or IsNull(referee_id);
+
+Sol :
+To select the names from the `Customer` table where `referee_id` is not 2 or is NULL, you can use the following SQL query:
+
+```sql
+SELECT name
+FROM Customer
+WHERE referee_id != 2 OR referee_id IS NULL;
+```
+
+This query will return:
+
+| name |
+|------|
+| Will |
+| Jane |
+| Bill |
+| Zack |
