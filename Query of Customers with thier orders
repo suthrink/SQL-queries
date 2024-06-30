@@ -1,0 +1,33 @@
+Table :
+CREATE TABLE Orders (
+    order_number INT PRIMARY KEY,
+    customer_number INT
+);
+
+order_number is the primary key for this table.
+This table contains information about the order ID and the customer ID.
+Write an SQL query to find the customer_number for the customer who has placed the largest
+number of orders.
+The test cases are generated so that exactly one customer will have placed more orders than any
+other customer.
+The query result format is in the following example.
+
+Input :
+INSERT INTO Orders (order_number, customer_number) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 3);
+
+
+Query :
+Select customer_number from Orders
+Group by customer_number
+having count(order_number) > 1
+
+
+Output:
+| customer_number |
+__________________
+|     3          |
+
