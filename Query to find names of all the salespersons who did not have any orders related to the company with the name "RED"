@@ -1,0 +1,85 @@
+Table 1:
+CREATE TABLE SalesPerson (
+    sales_id INT PRIMARY KEY,
+    name VARCHAR(255),
+    salary INT,
+    commission_rate INT,
+    hire_date DATE
+);
+
+sales_id is the primary key column for this table.
+Each row of this table indicates the name and the ID of a salesperson alongside their salary,
+commission rate, and hire date. 
+
+Table 2 :
+CREATE TABLE Company (
+    com_id INT PRIMARY KEY,
+    name VARCHAR(255),
+    city VARCHAR(255)
+);
+
+com_id is the primary key column for this table.
+Each row of this table indicates the name and the ID of a company and the city in which the company
+is located.
+
+Table 3:
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    com_id INT,
+    sales_id INT,
+    amount INT,
+    FOREIGN KEY (com_id) REFERENCES Company(com_id),
+    FOREIGN KEY (sales_id) REFERENCES SalesPerson(sales_id)
+);
+
+order_id is the primary key column for this table.
+com_id is a foreign key to com_id from the Company table.
+sales_id is a foreign key to sales_id from the SalesPerson table.
+Each row of this table contains information about one order. This includes the ID of the company, the
+ID of the salesperson, the date of the order, and the amount paid.
+Write an SQL query to report the names of all the salespersons who did not have any orders related to
+the company with the name "RED".
+Return the result table in any order.
+The query result format is in the following example.
+
+Input tb 1:
+INSERT INTO SalesPerson (sales_id, name, salary, commission_rate, hire_date) VALUES
+(1, 'John', 100000, 6, '2006-04-01'),
+(2, 'Amy', 12000, 5, '2010-05-01'),
+(3, 'Mark', 65000, 12, '2008-12-25'),
+(4, 'Pam', 25000, 25, '2005-01-01'),
+(5, 'Alex', 5000, 10, '2007-02-03');
+
+Input tb 2:
+INSERT INTO Company (com_id, name, city) VALUES
+(1, 'RED', 'Boston'),
+(2, 'ORANGE', 'New York'),
+(3, 'YELLOW', 'Boston'),
+(4, 'GREEN', 'Austin');
+
+Input tb 3 :
+INSERT INTO Orders (order_id, order_date, com_id, sales_id, amount) VALUES
+(1, '2014-01-01', 3, 4, 10000),
+(2, '2014-02-01', 4, 5, 5000),
+(3, '2014-03-01', 1, 1, 50000),
+(4, '2014-04-01', 1, 4, 25000);
+
+
+Query :
+Select s.name from SalesPerson as s
+Left Join Orders as o on o.sales_id = s.sales_id
+Where isnull(o.com_id) or o.sales_id Not In(Select o.sales_id from Orders as o
+Inner Join Company as c on c.com_id = o.com_id
+Where c.name = 'Red') 
+
+
+
+Output :
+| name|
+_______
+| Amy |
+| Mark|
+| Alex|
+
+
