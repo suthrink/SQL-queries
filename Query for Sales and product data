@@ -1,0 +1,54 @@
+Table 1:
+CREATE TABLE Sales (
+    sale_id INT,
+    product_id INT,
+    year INT,
+    quantity INT,
+    price INT,
+    PRIMARY KEY (sale_id, year),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+
+(sale_id, year) is the primary key of this table.
+product_id is a foreign key to the Product table.
+Each row of this table shows a sale on the product product_id in a certain year.
+Note that the price is per unit
+
+Table 2 :
+Create table Product
+(
+product_id int Primary key,
+product_name varchar(30)
+);
+
+product_id is the primary key of this table.
+Each row of this table indicates the product name of each product.
+Write an SQL query that reports the product_name, year, and price for each sale_id in the Sales table.
+Return the resulting table in any order.
+The query result format is in the following example.
+
+
+Input table 1 :
+
+INSERT INTO Sales (sale_id, product_id, year, quantity, price) VALUES
+(1, 100, 2008, 10, 5000),
+(2, 100, 2009, 12, 5000),
+(7, 200, 2011, 15, 9000);
+
+Input table 2 :
+INSERT INTO Product (product_id, product_name) VALUES
+(100, 'Nokia'),
+(200, 'Apple'),
+(300, 'Samsung');
+
+
+Query :
+Select p.product_name,s.year,s.price from Sales as s
+Left Join Product as p on p.product_id = s.product_id;
+
+Output:
+| product_name | year | price |
+|______________|______|_______|
+| Nokia        | 2008 | 5000  |
+| Nokia        | 2009 | 5000  |
+| Apple        | 2011 | 9000  |
