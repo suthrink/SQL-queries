@@ -1,0 +1,24 @@
+Table :
+CREATE TABLE Point (
+    x INT PRIMARY KEY
+);
+
+x is the primary key column for this table.
+Each row of this table indicates the position of a point on the X-axis.
+Write an SQL query to report the shortest distance between any two points from the Point table.
+The query result format is in the following example.
+
+Input:
+INSERT INTO Point (x) VALUES
+(-1),
+(0),
+(2);
+
+
+Query :
+
+
+Output :
+
+
+
