@@ -46,7 +46,7 @@ INSERT INTO Sales (seller_id, product_id, buyer_id, sale_date, quantity, price) 
 Query :
 Select buyer_id from employee2.Sales
 Where product_id In(Select product_id from employee2.Productdata
-Where product_name ='S8' );
+Where product_name ='S8' and product_name !='iPhone');
 
 Output:
 | buyer_id |
